@@ -59,13 +59,13 @@ jobs:
             cp -r /root/.m2/repository/org/apache/arrow/* /work/.m2/repository/org/apache/arrow/
           "
       - name: Upload native libs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: ./cpp/build/releases/
           name: velox-native-lib-${{github.sha}}
           retention-days: 1
       - name: Upload Artifact Arrow Jar
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: ${{ github.workspace }}/.m2/repository/org/apache/arrow/
           name: velox-arrow-jar-centos-7-${{github.sha}}
@@ -101,7 +101,7 @@ jobs:
           export PATH=${PATH}:${MAVEN_HOME}/bin && \
           mvn clean install -P${{ github.event.inputs.spark }} -Dhadoop.version=${{ github.event.inputs.hadoop }} -Pbackends-velox -Pspark-3.5 -Piceberg -DskipTests -Dmaven.source.skip
       - name: Upload bundle package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: gluten-velox-bundle-package
           path: package/target/gluten-velox-bundle-*.jar
